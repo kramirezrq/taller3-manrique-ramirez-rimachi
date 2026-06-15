@@ -3,7 +3,7 @@
 ## Descripción
 
 Implementación de una caché **LRU (Least Recently Used)** en Go, usando una
-lista doblemente enlazada (con nodos centinela `head`/`tail`) combinada con
+lista doblemente enlazada (con nodos ficticios `head`/`tail`) combinada con
 un mapa para acceso en O(1).
 
 La caché se evalúa con una secuencia real de accesos extraída del dataset
@@ -68,9 +68,8 @@ go test -bench=. -benchmem
 
 Como se esperaba, el hit ratio crece con el tamaño de la caché: al
 aumentar la capacidad, se puede retener una porción más grande del
-conjunto de películas más consultadas, reduciendo la cantidad de
-*misses*. El crecimiento entre 500 y 1000 (de 0.32 a 0.54) es más
-pronunciado que entre 50 y 100 (de 0.03 a 0.07): con cachés pequeñas, la
+grupo de películas más consultadas. El crecimiento entre 500 y 1000 (de 0.32 a 0.54) es más
+remarcado que entre 50 y 100 (de 0.03 a 0.07): con cachés pequeñas, la
 mayoría de los accesos son a películas que aún no están en la caché,
 mientras que con cachés más grandes se cubre una fracción significativa
 de las películas más populares del dataset.
