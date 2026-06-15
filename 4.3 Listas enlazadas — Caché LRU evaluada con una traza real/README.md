@@ -1,1 +1,98 @@
-oli
+# Taller 3 — Ejercicio 4.3: Caché LRU con Listas Enlazadas
+
+## Descripción
+
+Implementación de una caché **LRU (Least Recently Used)** en Go, usando una
+lista doblemente enlazada (con nodos centinela `head`/`tail`) combinada con
+un mapa para acceso en O(1).
+
+La caché se evalúa con una secuencia real de accesos extraída del dataset
+**MovieLens**: se ordena `ratings.csv` por `timestamp` y se toma la columna
+`movieId` como la secuencia de "películas pedidas" en orden cronológico.
+Se calcula el **hit ratio** (aciertos / accesos totales) para distintos
+tamaños de caché.
+
+## Dataset
+
+- **Fuente**: MovieLens (GroupLens) — `ratings.csv`
+- **Link**: https://grouplens.org/datasets/movielens/
+- **Columnas usadas**: `movieId`, `timestamp`
+- El archivo `ratings.csv` se encuentra en esta carpeta. Si se requiere
+  descargarlo de nuevo, usar la versión "ml-latest-small".
+
+## Estructura del proyecto
+
+```
+.
+├── lru.go          # Nodo, lista doblemente enlazada y caché LRU
+├── secuencia.go    # CargarSecuencia: lee y ordena ratings.csv
+├── main.go         # Simulación: corre la secuencia y calcula el hit ratio
+├── lru_test.go     # Tests unitarios y benchmarks
+└── ratings.csv     # Dataset (MovieLens)
+```
+
+## Cómo ejecutar
+
+Correr la simulación (genera la tabla de hit ratio):
+
+```bash
+go run .
+```
+
+Correr las pruebas unitarias:
+
+```bash
+go test ./...
+```
+
+Correr las pruebas con cobertura:
+
+```bash
+go test -cover ./...
+```
+
+Correr los benchmarks:
+
+```bash
+go test -bench=. -benchmem
+```
+
+## Resultados — Hit ratio
+
+| Tamaño de caché | Hit ratio |
+|---|---|
+| 50 | _pendiente_ |
+| 100 | _pendiente_ |
+| 500 | _pendiente_ |
+| 1000 | _pendiente_ |
+
+_(Completar con la salida de `go run .`. Se espera que el hit ratio aumente
+con el tamaño de la caché, con rendimientos decrecientes.)_
+
+## Complejidad
+
+- `Get` y `Put`: **O(1)** — el mapa ubica el nodo directamente, y las
+  operaciones de la lista doblemente enlazada (insertar al frente, mover al
+  frente, eliminar) son manipulación de punteros, sin recorridos.
+- `CargarSecuencia`: **O(n log n)** — dominado por el ordenamiento
+  (`sort.Slice`) de los registros por `timestamp`.
+
+## Uso de IA
+
+Se utilizó Claude (Anthropic) como asistente de aprendizaje para guiar el
+desarrollo de esta caché LRU paso a paso:
+
+- Se explicó el funcionamiento de los nodos centinela en la lista
+  doblemente enlazada, y la lógica de inserción/eliminación/movimiento de
+  nodos mediante reasignación de punteros.
+- Se explicó la combinación lista + mapa para lograr complejidad O(1) en
+  `Get` y `Put`, y la política de expulsión LRU.
+- Se explicó cómo leer y ordenar `ratings.csv` para construir la secuencia
+  de accesos usada en la simulación.
+- El código fue reescrito con nombres propios por el autor, ejecutado y
+  validado con `go run .` y `go test ./...`, y cada función fue revisada y
+  explicada línea por línea durante el desarrollo.
+
+## Video
+
+Link al video explicativo (no listado): _pendiente_
