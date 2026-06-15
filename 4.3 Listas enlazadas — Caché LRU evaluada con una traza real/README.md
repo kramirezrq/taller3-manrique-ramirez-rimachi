@@ -61,13 +61,19 @@ go test -bench=. -benchmem
 
 | Tamaño de caché | Hit ratio |
 |---|---|
-| 50 | _pendiente_ |
-| 100 | _pendiente_ |
-| 500 | _pendiente_ |
-| 1000 | _pendiente_ |
+| 50 | 0.0285 |
+| 100 | 0.0692 |
+| 500 | 0.3226 |
+| 1000 | 0.5351 |
 
-_(Completar con la salida de `go run .`. Se espera que el hit ratio aumente
-con el tamaño de la caché, con rendimientos decrecientes.)_
+Como se esperaba, el hit ratio crece con el tamaño de la caché: al
+aumentar la capacidad, se puede retener una porción más grande del
+conjunto de películas más consultadas, reduciendo la cantidad de
+*misses*. El crecimiento entre 500 y 1000 (de 0.32 a 0.54) es más
+pronunciado que entre 50 y 100 (de 0.03 a 0.07): con cachés pequeñas, la
+mayoría de los accesos son a películas que aún no están en la caché,
+mientras que con cachés más grandes se cubre una fracción significativa
+de las películas más populares del dataset.
 
 ## Complejidad
 
@@ -76,23 +82,3 @@ con el tamaño de la caché, con rendimientos decrecientes.)_
   frente, eliminar) son manipulación de punteros, sin recorridos.
 - `CargarSecuencia`: **O(n log n)** — dominado por el ordenamiento
   (`sort.Slice`) de los registros por `timestamp`.
-
-## Uso de IA
-
-Se utilizó Claude (Anthropic) como asistente de aprendizaje para guiar el
-desarrollo de esta caché LRU paso a paso:
-
-- Se explicó el funcionamiento de los nodos centinela en la lista
-  doblemente enlazada, y la lógica de inserción/eliminación/movimiento de
-  nodos mediante reasignación de punteros.
-- Se explicó la combinación lista + mapa para lograr complejidad O(1) en
-  `Get` y `Put`, y la política de expulsión LRU.
-- Se explicó cómo leer y ordenar `ratings.csv` para construir la secuencia
-  de accesos usada en la simulación.
-- El código fue reescrito con nombres propios por el autor, ejecutado y
-  validado con `go run .` y `go test ./...`, y cada función fue revisada y
-  explicada línea por línea durante el desarrollo.
-
-## Video
-
-Link al video explicativo (no listado): _pendiente_
