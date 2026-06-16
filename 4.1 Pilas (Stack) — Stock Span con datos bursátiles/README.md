@@ -63,20 +63,6 @@ go test ./pilas/... -bench=. -benchmem -benchtime=3s -run=^$
 
 ```
 
----
-
-## 🎥 Video explicativo
-
-> 📺 **Enlace al video en YouTube:** [INSERTAR ENLACE AQUÍ]
-
-El video incluye:
-- Presentación de los integrantes del grupo
-- Explicación de la estructura Stack genérica
-- Demostración del algoritmo Stock Span en ejecución
-- Análisis de resultados de performance
-
----
-
 ## 📊 Origen del dataset
 
 ### Ejercicio 1 — Pilas (Stock Span)
