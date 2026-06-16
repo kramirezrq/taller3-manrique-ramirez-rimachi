@@ -1,8 +1,4 @@
----
-
 ## Video explicativo
-
-> **Enlace al video en YouTube:** https://youtu.be/58Jl9629jBI 
 
 El video incluye:
 - Presentación de los miembros del grupo
@@ -10,4 +6,5 @@ El video incluye:
 - Demostración de los algoritmos corriendo
 - Análisis de resultados de performance
 
----
+Video:
+:contentReference[oaicite:1]{index=1}
