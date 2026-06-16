@@ -1,6 +1,6 @@
 ## Video explicativo
 
-El video incluye:
+El video contiene...
 - Presentación de los miembros del grupo
 - Explicación de las estructuras
 - Demostración de los algoritmos corriendo
