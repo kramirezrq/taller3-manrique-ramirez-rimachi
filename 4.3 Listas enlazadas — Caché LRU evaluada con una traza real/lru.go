@@ -117,13 +117,3 @@ func (l *lru) Put(IDpelicula, valor int) {
 	l.lista.agregaralfrente(n) // lo colocamos como el más reciente
 	l.mapa[IDpelicula] = n     // lo registramos en el mapa
 }
-
-// len retornamos cuántas claves hay guardadas en la caché
-func (l *lru) Len() int {
-	return len(l.mapa) // contamos las claves del mapa
-}
-
-// cap retornamos la capacidad máxima configurada al crear la caché
-func (l *lru) Cap() int {
-	return l.capacidadmaxima
-}
